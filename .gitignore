@@ -1,0 +1,11 @@
+# Ignore Python junk
+__pycache__/
+*.pyc
+
+# Ignore PDF files you generate
+*.pdf
+
+# Ignore editor or computer junk
+*.log
+.DS_Store
+Thumbs.db
