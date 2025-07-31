@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Beat Activity Report</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Page header with the county seal and main titles -->
+        <header class="page-header">
+            <!-- Dallas County seal.  Place the PNG file in the same directory as this HTML file.
+                 The alt text provides an accessible description for screen readers. -->
+            <img src="dallas_seal.png" alt="Dallas County Seal" class="seal">
+            <div class="header-text">
+                <!-- The main title is bold and underlined to match the original document -->
+                <h1><u>Dallas County Fire Marshal</u></h1>
+                <p class="sub-header">Police, Fire and Safety Services (GLOA)</p>
+                <p class="sub-header">Service First, Always</p>
+                <h2>DAILY BEAT ACTIVITY REPORT</h2>
+            </div>
+        </header>
+
+        <!-- Location selector -->
+        <section class="location-section">
+            <label for="location">Location:</label>
+            <select id="location" name="location">
+                <option value="HHS/SWIFS">HHS/SWIFS</option>
+                <option value="George Allen Courts Building">George Allen Courts Building</option>
+                <option value="Health and Human Services Building">Health and Human Services Building</option>
+            </select>
+        </section>
+
+        <!-- Report Information section -->
+        <section class="report-info">
+            <h3>Report Information</h3>
+            <!-- Using a CSS grid to arrange fields in a neat table-like structure -->
+            <div class="grid">
+                <div class="field">
+                    <label for="officerName">Officer Name:</label>
+                    <input type="text" id="officerName" name="officerName" required>
+                </div>
+                <div class="field">
+                    <label for="badgeNumber">Badge Number:</label>
+                    <input type="text" id="badgeNumber" name="badgeNumber" required>
+                </div>
+                <div class="field">
+                    <label for="keySet">Key Set:</label>
+                    <input type="text" id="keySet" name="keySet">
+                </div>
+                <div class="field">
+                    <label for="reportDate">Date:</label>
+                    <input type="date" id="reportDate" name="reportDate" required>
+                </div>
+                <div class="field">
+                    <label for="radioNumber">Radio Number:</label>
+                    <input type="text" id="radioNumber" name="radioNumber">
+                </div>
+                <div class="field">
+                    <label for="patrols">Number of Patrols:</label>
+                    <input type="number" id="patrols" name="patrols" min="0" value="0">
+                </div>
+                <div class="field">
+                    <label for="oicName">OIC/Sgt Name:</label>
+                    <input type="text" id="oicName" name="oicName">
+                </div>
+                <div class="field">
+                    <label for="dispatchers">Dispatcher(s):</label>
+                    <input type="text" id="dispatchers" name="dispatchers">
+                </div>
+            </div>
+        </section>
+
+        <!-- Post Specific / Completion Times section -->
+        <section class="post-specific">
+            <h3>Post Specific / Completion Times</h3>
+            <div class="grid">
+                <!-- Each field corresponds to a patrol or task on the original report -->
+                <div class="field">
+                    <label for="inventoryComplete">Key/Equip Inventory Complete:</label>
+                    <input type="text" id="inventoryComplete" name="inventoryComplete">
+                </div>
+                <div class="field">
+                    <label for="hhsLockUp">HHS Lock Up:</label>
+                    <input type="text" id="hhsLockUp" name="hhsLockUp">
+                </div>
+                <div class="field">
+                    <label for="basement">Basement:</label>
+                    <input type="text" id="basement" name="basement">
+                </div>
+                <div class="field">
+                    <label for="roof">Roof Access:</label>
+                    <input type="text" id="roof" name="roof">
+                </div>
+                <div class="field">
+                    <label for="upperLevels">Upper Levels:</label>
+                    <input type="text" id="upperLevels" name="upperLevels">
+                </div>
+                <div class="field">
+                    <label for="midLevels">Mid-Levels:</label>
+                    <input type="text" id="midLevels" name="midLevels">
+                </div>
+                <div class="field">
+                    <label for="lowerLevels">Lower Levels:</label>
+                    <input type="text" id="lowerLevels" name="lowerLevels">
+                </div>
+                <div class="field">
+                    <label for="parkingLots">Parking Lots:</label>
+                    <input type="text" id="parkingLots" name="parkingLots">
+                </div>
+                <div class="field">
+                    <label for="alarms">Alarms:</label>
+                    <input type="text" id="alarms" name="alarms">
+                </div>
+                <div class="field">
+                    <label for="specialAssignments">Special Assignments:</label>
+                    <input type="text" id="specialAssignments" name="specialAssignments">
+                </div>
+                <div class="field">
+                    <label for="otherTasks">Other (specify):</label>
+                    <input type="text" id="otherTasks" name="otherTasks">
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Generated section -->
+        <section class="reports-generated">
+            <h3>Reports Generated</h3>
+            <table id="reportsTable">
+                <thead>
+                    <tr>
+                        <th>RMS #</th>
+                        <th>Submitted?</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="reportsBody">
+                    <!-- Rows will be added dynamically using JavaScript -->
+                </tbody>
+            </table>
+            <button type="button" id="addReportRow" class="small-button">Add Report</button>
+        </section>
+
+        <!-- Vehicle Report Cards section -->
+        <section class="vehicle-report-cards">
+            <h3>Vehicle Report Cards</h3>
+            <!-- Four separate cards as specified -->
+            <div class="vehicle-cards-container">
+                <!-- We create four cards with the same set of inputs -->
+                <div class="vehicle-card" data-index="1">
+                    <h4>Report Card 1</h4>
+                    <div class="field">
+                        <label>Pass</label>
+                        <input type="radio" name="vehicle1Status" value="Pass" checked>
+                        <label>Fail</label>
+                        <input type="radio" name="vehicle1Status" value="Fail">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1Make">Make/Model:</label>
+                        <input type="text" id="vehicle1Make" name="vehicle1Make">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1Time">Time:</label>
+                        <input type="text" id="vehicle1Time" name="vehicle1Time">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1Lic">Lic#:</label>
+                        <input type="text" id="vehicle1Lic" name="vehicle1Lic">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1Reason">Reason:</label>
+                        <input type="text" id="vehicle1Reason" name="vehicle1Reason">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1OW">OW/Prop/Other:</label>
+                        <input type="text" id="vehicle1OW" name="vehicle1OW">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle1Loc">Loc:</label>
+                        <input type="text" id="vehicle1Loc" name="vehicle1Loc">
+                    </div>
+                </div>
+                <div class="vehicle-card" data-index="2">
+                    <h4>Report Card 2</h4>
+                    <div class="field">
+                        <label>Pass</label>
+                        <input type="radio" name="vehicle2Status" value="Pass" checked>
+                        <label>Fail</label>
+                        <input type="radio" name="vehicle2Status" value="Fail">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2Make">Make/Model:</label>
+                        <input type="text" id="vehicle2Make" name="vehicle2Make">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2Time">Time:</label>
+                        <input type="text" id="vehicle2Time" name="vehicle2Time">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2Lic">Lic#:</label>
+                        <input type="text" id="vehicle2Lic" name="vehicle2Lic">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2Reason">Reason:</label>
+                        <input type="text" id="vehicle2Reason" name="vehicle2Reason">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2OW">OW/Prop/Other:</label>
+                        <input type="text" id="vehicle2OW" name="vehicle2OW">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle2Loc">Loc:</label>
+                        <input type="text" id="vehicle2Loc" name="vehicle2Loc">
+                    </div>
+                </div>
+                <div class="vehicle-card" data-index="3">
+                    <h4>Report Card 3</h4>
+                    <div class="field">
+                        <label>Pass</label>
+                        <input type="radio" name="vehicle3Status" value="Pass" checked>
+                        <label>Fail</label>
+                        <input type="radio" name="vehicle3Status" value="Fail">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle3Make">Make/Model:</label>
+                        <input type="text" id="vehicle3Make" name="vehicle3Make">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle3Time">Time:</label>
+                        <input type="text" id="vehicle3Time" name="vehicle3Time">
+                    </div>
+                    <div class="field">
+                        <label for "vehicle3Lic">Lic#:</label>
+                        <input type="text" id="vehicle3Lic" name="vehicle3Lic">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle3Reason">Reason:</label>
+                        <input type="text" id="vehicle3Reason" name="vehicle3Reason">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle3OW">OW/Prop/Other:</label>
+                        <input type="text" id="vehicle3OW" name="vehicle3OW">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle3Loc">Loc:</label>
+                        <input type="text" id="vehicle3Loc" name="vehicle3Loc">
+                    </div>
+                </div>
+                <div class="vehicle-card" data-index="4">
+                    <h4>Report Card 4</h4>
+                    <div class="field">
+                        <label>Pass</label>
+                        <input type="radio" name="vehicle4Status" value="Pass" checked>
+                        <label>Fail</label>
+                        <input type="radio" name="vehicle4Status" value="Fail">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4Make">Make/Model:</label>
+                        <input type="text" id="vehicle4Make" name="vehicle4Make">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4Time">Time:</label>
+                        <input type="text" id="vehicle4Time" name="vehicle4Time">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4Lic">Lic#:</label>
+                        <input type="text" id="vehicle4Lic" name="vehicle4Lic">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4Reason">Reason:</label>
+                        <input type="text" id="vehicle4Reason" name="vehicle4Reason">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4OW">OW/Prop/Other:</label>
+                        <input type="text" id="vehicle4OW" name="vehicle4OW">
+                    </div>
+                    <div class="field">
+                        <label for="vehicle4Loc">Loc:</label>
+                        <input type="text" id="vehicle4Loc" name="vehicle4Loc">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicle Inspection section -->
+        <section class="vehicle-inspection">
+            <h3>Vehicle Inspection</h3>
+            <div class="grid">
+                <div class="field">
+                    <label for="beginningMileage">Beginning Mileage:</label>
+                    <input type="text" id="beginningMileage" name="beginningMileage">
+                </div>
+                <div class="field">
+                    <label for="endingMileage">Ending Mileage:</label>
+                    <input type="text" id="endingMileage" name="endingMileage">
+                </div>
+                <div class="field">
+                    <label for="exteriorDamage">Vehicle Exterior Damage:</label>
+                    <input type="text" id="exteriorDamage" name="exteriorDamage">
+                </div>
+                <div class="field">
+                    <label for="interiorDamage">Vehicle Interior Damage:</label>
+                    <input type="text" id="interiorDamage" name="interiorDamage">
+                </div>
+                <div class="field">
+                    <label for="fluidLevels">Fluid Levels Checked (Y/N):</label>
+                    <input type="text" id="fluidLevels" name="fluidLevels">
+                </div>
+                <div class="field">
+                    <label for="tireCondition">Tire Condition:</label>
+                    <input type="text" id="tireCondition" name="tireCondition">
+                </div>
+                <div class="field">
+                    <label for="vehicleOther">Other Vehicle Notes:</label>
+                    <input type="text" id="vehicleOther" name="vehicleOther">
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes section -->
+        <section class="notes-section">
+            <h3>Notes</h3>
+            <textarea id="notes" name="notes" rows="5" placeholder="Enter general notes here..."></textarea>
+        </section>
+
+        <!-- Signature section -->
+        <section class="signature-section">
+            <h3>Signature</h3>
+            <div class="grid">
+                <div class="field">
+                    <label for="receivedBy">Rec by Watch OIC/SGT:</label>
+                    <input type="text" id="receivedBy" name="receivedBy">
+                </div>
+                <div class="field">
+                    <label for="signatureDate">Date:</label>
+                    <input type="date" id="signatureDate" name="signatureDate">
+                </div>
+            </div>
+        </section>
+
+        <!-- Generate PDF button -->
+        <div class="generate-button-container">
+            <button id="generatePdf" class="primary-button" type="button">Generate PDF</button>
+        </div>
+    </div>
+
+    <!-- Link to the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
